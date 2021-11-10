@@ -17,7 +17,9 @@
     "webpack-cli": "^4.9.1"
   },
   "dependencies": {
+    "core-js": "^3.19.1",
     "github-api": "^3.4.0",
-    "preact": "^10.5.15"
+    "preact": "^10.5.15",
+    "regenerator-runtime": "^0.13.9"
   }
 }
