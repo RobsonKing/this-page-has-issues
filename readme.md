@@ -1,14 +1,8 @@
 ## todo rmk (08 Nov. 2021):
- - search
-    - get url from page
-    - build query
-    - test searching for url
-    - does regex help?
   - menu item to get page url
   - menu item to log bug
-  - link to issue
   - preview issue
-  - closed vs open issues
+  - filter closed vs open issues
   - add extra search params
   - bring over: menu code
   - save token
@@ -19,3 +13,8 @@
  - tests
  - record what url = what repo (staging, dev, etc)
  - milestone!
+ - copy URL and create bug
+ - group by bug, issues, etc
+ - alias routes
+ - fall back to wild card search
+ - how to store css in preact

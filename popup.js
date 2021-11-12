@@ -19,6 +19,9 @@ const query = `
       __typename
       ... on Issue{
         number
+        milestone{
+          title
+        }
         state
         title
         author{
@@ -30,7 +33,7 @@ const query = `
   }
   }`;
 
-function Repos() {
+function Issues() {
     const [issues, setIssues] = useState([]);
     const [currentPage, setCurrentPage] = useState("");
 
@@ -74,20 +77,39 @@ function Repos() {
         };
     }, []);
 
+    // todo rmk (11 Nov. 2021): truncate long titles
+    //  -
     return (
-        <div>
-            Current Page
-            {currentPage}
-           Repos
-            {issues.map( (repo)=><div>{repo.title}</div>)}
+        <div style={{display:'flex',flexDirection:"column",width:600}}>
+            {/*Current Page*/}
+            {/*{currentPage}*/}
+            <div style={{fontWeight:"Bold",fontsize:"20"}}>Issues</div>
+            <div style={{display:'flex',flexDirection:"column"}}>
+                {issues.map( (issue)=><div style={{
+                    display:'flex',
+                    flexDirection:"row",
+                    borderStyle: "solid",
+                    borderWidth: 1,
+                    borderColor:'lightgrey',
+                    padding:5,
+                }}>
+                    <div style={{flex:"1", color: issue.state === "OPEN" ? 'green' : 'purple'}}>{issue.number}</div>
+                    {!!issue.milestone && <div style={{flex:"2"}}>{issue.milestone.title}</div>}
+                    <div style={{flex:"5"}}>
+                        <a href={issue.url} target="_blank">
+                            {issue.title}
+                        </a>
+                    </div>
+                </div>)}
+            </div>
+
         </div>
     );
 }
 
 render(
     <div>
-        Hello world
-        <Repos/>
+        <Issues/>
     </div>,
     document.getElementById('app')
 );
