@@ -26,4 +26,5 @@
 - axios? what does this do for me?
 - respect browser dark mode
 -
-    * spinner while loading
+  * spinner while loading
+- switch to react?
