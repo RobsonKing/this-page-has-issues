@@ -12,19 +12,41 @@
 - tests
 - record what url = what repo (staging, dev, etc)
 -
-    * issue assigned to
+  * issue assigned to
 - copy URL and create bug
 - group by bug, issues, etc
 - alias routes
 - fall back to wild card search
--
-    * how to store css in preact
 - search by page title
 - search by location on page (right click)
-    - show tree of nodes? let the use select
-- typescript?
+  - show tree of nodes? let the use select
+- typescript!
+  - this is not a webpage.. remove some stuff
 - axios? what does this do for me?
 - respect browser dark mode
 -
   * spinner while loading
 - switch to react?
+
+# Getting Started
+
+## Install
+
+`yarn`
+
+## Develop
+
+js that is not minified and easier to debug
+
+start watching the source and rebuilding.
+
+`yarn dev:watch`
+
+one time dev build
+
+`yarn dev`
+
+## Production
+
+`yarn build`
+

@@ -1,7 +1,7 @@
 import {h} from 'preact';
 import {useEffect, useState} from "preact/hooks";
 import {githubIssueService} from "../../services/IssueService";
-import style from './style.scss'
+import styles from './style.scss'
 
 export default function Issues() {
     const [issues, setIssues] = useState([]);
@@ -16,12 +16,12 @@ export default function Issues() {
     }, []);
 
     return (
-        <div className='container'>
-            <div className='title'>Issues</div>
-            <div className='issue-list'>
-                {issues.length === 0 && <div className='issue-warning'>No issues found</div>}
-                {issues.map((issue) => <div className='issue'>
-                    <div className={issue.isOpen ? 'open' : 'closed'} style={{flex: "1"}}>{issue.number}</div>
+        <div className={styles.container}>
+            <div className={styles.title}>Issues</div>
+            <div className={styles["issue-list"]}>
+                {issues.length === 0 && <div className={styles["issue-warning"]}>No issues found</div>}
+                {issues.map((issue) => <div className={styles.issue}>
+                    <div className={issue.isOpen ? styles.open : styles.closed} style={{flex: "1"}}>{issue.number}</div>
                     <div style={{flex: "2"}}>{issue.milestone}</div>
                     <div style={{flex: "5"}}>
                         <a href={issue.url} target="_blank">

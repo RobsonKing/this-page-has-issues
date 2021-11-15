@@ -1,5 +1,5 @@
-import "core-js/stable";
-import "regenerator-runtime/runtime";
+// import "core-js/stable";
+// import "regenerator-runtime/runtime";
 
 import {render, h} from 'preact';
 import Issues from "./src/components/Issues/Issues";
