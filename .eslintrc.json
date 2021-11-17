@@ -6,13 +6,18 @@
   },
   "extends": [
     "eslint:recommended",
-    "standard-preact",
+    "plugin:react/recommended",
     "plugin:promise/recommended",
     "plugin:sonarjs/recommended",
     "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:@typescript-eslint/recommended-requiring-type-checking"
+    "plugin:@typescript-eslint/recommended"
+    //    "plugin:@typescript-eslint/recommended-requiring-type-checking"
   ],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
   "ignorePatterns": [
     "*-test.ts",
     "*-test.tsx"
@@ -161,13 +166,6 @@
       "1tbs"
     ],
     "@typescript-eslint/indent": "off",
-    "@typescript-eslint/quotes": [
-      "error",
-      "single",
-      {
-        "avoidEscape": true
-      }
-    ],
     "@typescript-eslint/func-call-spacing": [
       "error",
       "never"

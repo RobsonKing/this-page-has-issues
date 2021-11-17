@@ -21,12 +21,14 @@
 - search by location on page (right click)
   - show tree of nodes? let the use select
 - typescript!
-  - this is not a webpage.. remove some stuff
+  * #### convert service classes
 - axios? what does this do for me?
 - respect browser dark mode
 -
   * spinner while loading
 - switch to react?
+- graphql-tag for queries
+- appollo
 
 # Getting Started
 
