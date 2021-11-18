@@ -29,7 +29,7 @@ const query = `
   }`;
 
 // todo rmk (12 Nov. 2021):move to different file
-class IssueModel {
+export class IssueModel {
     constructor(issue) {
         this._issue = issue;
     }

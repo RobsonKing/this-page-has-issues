@@ -24,11 +24,11 @@
   * #### convert service classes
 - axios? what does this do for me?
 - respect browser dark mode
--
-  * spinner while loading
-- switch to react?
 - graphql-tag for queries
-- appollo
+- apollo
+  - network status
+  - build custom hook
+    - this is where stuff will live to check config etc
 
 # Getting Started
 
