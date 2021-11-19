@@ -22,6 +22,8 @@
   - show tree of nodes? let the use select
 - typescript!
   * #### convert service classes
+  * better way to get graph
+    types https://dev.to/acro5piano/step-by-step-guide-of-how-to-painlessly-type-graphql-execution-result-47kn
 - axios? what does this do for me?
 - respect browser dark mode
 - graphql-tag for queries
@@ -29,6 +31,7 @@
   - network status
   - build custom hook
     - this is where stuff will live to check config etc
+- error boundary
 
 # Getting Started
 

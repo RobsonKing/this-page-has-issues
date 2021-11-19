@@ -2,8 +2,8 @@ import {gql, useQuery} from "@apollo/client";
 import {IssueModel} from "../services/IssueService";
 
 const query = gql`
-    query {
-        search(first:5,query:"repo:atvenu/atvenu refund",type:ISSUE){
+    query getIssues($first : Int!, $query: String!){
+        search(first: $first, query: $query, type:ISSUE){
             nodes{
                 ... on Issue{
                     number
@@ -12,6 +12,11 @@ const query = gql`
         }
     }
 `;
+
+interface IssueVars {
+    first: number
+    query: string
+}
 
 interface SearchData {
     search: {
@@ -22,14 +27,21 @@ interface SearchData {
 }
 
 export const useIssues = (): { loading: boolean; issues: IssueModel[] } => {
-    const {loading, data} = useQuery<SearchData>(
-        query
+
+    // get query from somewhere
+    const {loading, data, error} = useQuery<SearchData, IssueVars>(
+        query,
+        {variables: {first: 10, query: "repo:atvenu/atvenu refund"}}
     );
+    // todo rmk (18 Nov. 2021):do something with error!
+    console.log("*** error ***", error); // todo rmk (18 Nov. 2021): remove
     let issues = [];
     if (!loading) {
+        console.log("*** data ***", data); // todo rmk (18 Nov. 2021): remove
         issues = data.search.nodes.map(issue => new IssueModel(issue));
     }
 
+    // todo rmk (18 Nov. 2021): return not configured
     return {loading, issues};
 };
 
