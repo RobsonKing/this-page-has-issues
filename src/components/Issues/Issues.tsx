@@ -1,52 +1,10 @@
 import * as React from "react";
-import {IssueModel} from "../../services/IssueService";
 import styles from './style.scss';
-// import {useEffect, useState} from "react";
-import {useQuery, gql} from '@apollo/client';
 import BarLoader from "react-spinners/BarLoader";
-
-const query = gql`
-    query {
-        search(first:5,query:"repo:atvenu/atvenu refund",type:ISSUE){
-            nodes{
-                ... on Issue{
-                    number
-                }
-            }
-        }
-    }
-`;
-
-interface SearchData {
-    search: {
-        nodes: [{
-            number: number
-        }]
-    }
-}
+import {useIssues} from "../../hooks/useIsues";
 
 export default function Issues(): React.FC<null> {
-    // const [issues, setIssues] = useState([]);
-
-    const {loading, data} = useQuery<SearchData>(
-        query
-    );
-    let issues = [];
-    if (!loading) {
-        console.log("*** tada? ***",); // todo rmk (16 Nov. 2021): remove
-        data.search.nodes.forEach(node => console.log('?', node.number));
-        issues = data.search.nodes.map(issue => new IssueModel(issue));
-    }
-
-
-    // useEffect(() => {
-    //     const getData = async (): Promise<void> => {
-    //         setIssues(await githubIssueService.getIssuesForCurrentPage());
-    //     };
-    //
-    //     // noinspection JSIgnoredPromiseFromCall
-    //     getData();
-    // }, []);
+    const {loading, issues} = useIssues();
 
     return (
         <div className={styles.container}>

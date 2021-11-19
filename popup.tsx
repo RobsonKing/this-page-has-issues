@@ -6,7 +6,6 @@ import {
     InMemoryCache,
     createHttpLink,
     ApolloProvider,
-    gql
 } from "@apollo/client";
 import {setContext} from '@apollo/client/link/context';
 
@@ -14,6 +13,7 @@ const httpLink = createHttpLink({
     uri: 'https://api.github.com/graphql',
 });
 
+// todo rmk (18 Nov. 2021): get this from storage somehow...
 const token = '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';
 const authLink = setContext((_, {headers}) => {
     // get the authentication token from local storage if it exists
@@ -32,31 +32,9 @@ const client = new ApolloClient({
     cache: new InMemoryCache()
 });
 
-const query = gql`
-    query {
-        search(first:5,query:"repo:atvenu/atvenu refund",type:ISSUE){
-            nodes{
-                __typename
-                ... on Issue{
-                    number
-                }
-            }
-        }
-    }
-`;
-
-setTimeout(() => {
-    console.log("*** client ***", client, query); // todo rmk (16 Nov. 2021): remove
-    client.query({query})
-        .then(result => console.log(result)).catch(error => console.log(error));
-}, 5000);
-
-
 ReactDOM.render(
     <ApolloProvider client={client}>
-        <div>
-            <Issues/>
-        </div>
+        <Issues/>
     </ApolloProvider>,
     document.getElementById('app')
 );
