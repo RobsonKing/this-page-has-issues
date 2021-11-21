@@ -37,7 +37,6 @@ const client = new ApolloClient({
 
 const getCurrentUrl = async (): Promise<URL> => {
     const queryOptions = {active: true, currentWindow: true};
-    // @ts-ignore
     const [tab] = await chrome.tabs.query(queryOptions);
     return new URL(tab.url);
 };
@@ -57,6 +56,7 @@ const Popup = (): React.FC<null> => {
 
     // todo rmk (20 Nov. 2021):
     //  render config if set or no token
+    // todo rmk (20 Nov. 2021):this is where we check that this page is a site we know!
 
     return url ? <ApolloProvider client={client}>
             <Issues url={url}/>
