@@ -172,7 +172,7 @@
     ],
     "@typescript-eslint/no-useless-constructor": "error",
     "@typescript-eslint/prefer-for-of": "warn",
-    "@typescript-eslint/no-parameter-properties": "error",
+//    "@typescript-eslint/no-parameter-properties": "error",
     "@typescript-eslint/no-unnecessary-type-arguments": "warn",
     "@typescript-eslint/prefer-function-type": "warn",
     "@typescript-eslint/prefer-readonly": "warn",

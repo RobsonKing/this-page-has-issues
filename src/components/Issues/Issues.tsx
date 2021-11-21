@@ -1,10 +1,14 @@
 import * as React from "react";
 import styles from './style.scss';
 import BarLoader from "react-spinners/BarLoader";
-import {useIssues} from "../../hooks/useIsues";
+import {useIssues} from "../../hooks/useIssues";
 
-export default function Issues(): React.FC<null> {
-    const {loading, issues} = useIssues();
+interface IProps {
+    url: URL
+}
+
+export default function Issues({url}: IProps): React.FC<IProps> {
+    const {loading, issues} = useIssues(url);
 
     return (
         <div className={styles.container}>

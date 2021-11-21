@@ -8,7 +8,10 @@ import {
     ApolloProvider,
 } from "@apollo/client";
 import {setContext} from '@apollo/client/link/context';
+import {useEffect, useState} from "react";
+import BarLoader from "react-spinners/BarLoader";
 
+// todo rmk (20 Nov. 2021):move to apollo file
 const httpLink = createHttpLink({
     uri: 'https://api.github.com/graphql',
 });
@@ -32,9 +35,36 @@ const client = new ApolloClient({
     cache: new InMemoryCache()
 });
 
+const getCurrentUrl = async (): Promise<URL> => {
+    const queryOptions = {active: true, currentWindow: true};
+    // @ts-ignore
+    const [tab] = await chrome.tabs.query(queryOptions);
+    return new URL(tab.url);
+};
+
+const Popup = (): React.FC<null> => {
+
+    // todo rmk (20 Nov. 2021): custom hook
+    const [url, setUrl] = useState<URL | null>(null);
+    useEffect(() => {
+        const getData = async (): Promise<void> => {
+            setUrl(await getCurrentUrl());
+        };
+
+        // noinspection JSIgnoredPromiseFromCall
+        getData();
+    }, []);
+
+    // todo rmk (20 Nov. 2021):
+    //  render config if set or no token
+
+    return url ? <ApolloProvider client={client}>
+            <Issues url={url}/>
+        </ApolloProvider> :
+        <BarLoader loading={true} color='gray' width='100%'/>;
+};
+
 ReactDOM.render(
-    <ApolloProvider client={client}>
-        <Issues/>
-    </ApolloProvider>,
+    <Popup/>,
     document.getElementById('app')
 );
