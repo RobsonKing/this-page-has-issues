@@ -1,18 +1,9 @@
-//todo replace with auto generated
-export interface GithubIssue {
-    number: number
-    title: string
-    // todo: enum?
-    state: string
-    url: string
-    milestone: {
-        title: string
-    }
-}
+import {GetIssues_search_nodes_Issue} from "../services/__generated__/getIssues";
+import {IssueState} from "../../__generated__/globalTypes";
 
 export default class IssueModel {
 
-    constructor(private readonly issue: GithubIssue) {
+    constructor(private readonly issue: GetIssues_search_nodes_Issue) {
     }
 
     get title(): string {
@@ -29,7 +20,7 @@ export default class IssueModel {
 
     // todo: closed, fixed...
     get isOpen(): boolean {
-        return this.issue.state === "OPEN";
+        return this.issue.state === IssueState.OPEN;
     }
 
     get url(): string {

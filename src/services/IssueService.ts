@@ -9,7 +9,7 @@ const PAGE = "*PAGE*";
 //  words must be together, but need and end so it doesn't find child pages or other URLs
 
 const ISSUE_QUERY = gql`
-    query getIssues($first : Int!, $query: String!){
+    query GetIssues($first : Int!, $query: String!){
         search(first: $first, query: $query,type:ISSUE){
             nodes{
                 ... on Issue{
