@@ -10,6 +10,7 @@ import {
 import {setContext} from '@apollo/client/link/context';
 import {useEffect, useState} from "react";
 import BarLoader from "react-spinners/BarLoader";
+import RepoConfig from "./src/components/RepoConfig/RepoConfig";
 
 // todo rmk (20 Nov. 2021):move to apollo file
 const httpLink = createHttpLink({
@@ -54,14 +55,32 @@ const Popup = (): React.FC<null> => {
         getData();
     }, []);
 
+    // todo rmk (22 Nov. 2021):how to switch ui...
+    //  how to show it if
+    //   - they want it
+    //   - show a default no repos configured... click here!
+    // const [repoConfig,] = useState(null);
+    // if (!repoConfig) {
+    //     return <RepoConfig/>;
+    // }
+    const [showConfig, setShowConfig] = useState(true);
+
     // todo rmk (20 Nov. 2021):
     //  render config if set or no token
-    // todo rmk (20 Nov. 2021):this is where we check that this page is a site we know!
 
-    return url ? <ApolloProvider client={client}>
-            <Issues url={url}/>
-        </ApolloProvider> :
-        <BarLoader loading={true} color='gray' width='100%'/>;
+    const loading = !url;
+
+    if (loading) {
+        return <BarLoader loading={true} color='gray' width='100%'/>;
+    }
+
+    if (showConfig) {
+        return <RepoConfig hide={() => setShowConfig(false)}/>;
+    }
+
+    return <ApolloProvider client={client}>
+        <Issues url={url} showConfig={() => setShowConfig(true)}/>
+    </ApolloProvider>;
 };
 
 ReactDOM.render(

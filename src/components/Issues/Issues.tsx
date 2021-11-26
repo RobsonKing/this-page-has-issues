@@ -5,15 +5,19 @@ import {useIssues} from "../../hooks/useIssues";
 
 interface IProps {
     url: URL
+    showConfig: () => void
 }
 
-export default function Issues({url}: IProps): React.FC<IProps> {
+export default function Issues({url, showConfig}: IProps): React.FC<IProps> {
     const {loading, issues} = useIssues(url);
 
     return (
         <div className={styles.container}>
             {loading ? <BarLoader loading={true} color='gray' width='100%'/> :
                 <>
+                    <div>
+                        <button onClick={showConfig}>config...</button>
+                    </div>
                     <div className={styles.title}>Issues</div>
                     <div className={styles["issue-list"]}>
                         {issues.length === 0 && <div className={styles["issue-warning"]}>No issues found</div>}

@@ -6,14 +6,21 @@
 - filter closed vs open issues
 - add extra search params
 - bring over: menu code
-- save token
-- save URL mapping
+- save:
+  - token
+  - repo name
+  - use token to fetch issues
+  - clean up and share storage code
+  - obfuscate token
+  - add tool tip to how to get token
+- allow user to switch between configured repos
 - search limit... paging...
 - tests
 - record what url = what repo (staging, dev, etc)
   - is the page part of your site?
--
+- fields to add :
   * issue assigned to
+  * avatar
 - copy URL and create bug
 - group by bug, issues, etc
 - alias routes (vs vs as)
@@ -38,11 +45,11 @@
 
 js that is not minified and easier to debug
 
-start watching the source and rebuilding.
+Start watching the source and rebuilding.
 
 `yarn dev:watch`
 
-one time dev build
+One time dev build
 
 `yarn dev`
 
@@ -52,6 +59,8 @@ Because we use graphql which has types and typescript we can use some magic from
 will look through our code for any gql queries and generate the types for just those queries and results.
 
 Which is great when dealing with a large schema like github which we don't use!
+
+So if you change/add a query regenerate the types!
 
 Update the schema file by downloading from:
 https://docs.github.com/en/graphql/overview/public-schema
