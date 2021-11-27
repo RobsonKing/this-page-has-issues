@@ -2,6 +2,7 @@ import * as React from "react";
 import {Form, Formik, Field} from 'formik';
 import {useEffect, useState} from "react";
 import BarLoader from "react-spinners/BarLoader";
+import styles from './style.scss';
 
 interface IProps {
     hide: () => void
@@ -51,8 +52,9 @@ export default function RepoConfig({hide}: IProps): React.FC<IProps> {
 
 
     return config ?
-        <div>
-            config something!
+        <div className={styles.container}>
+            <div className={styles.title}>Configure Repository</div>
+
             <Formik
                 initialValues={config}
                 onSubmit={(values, actions) => {
@@ -61,15 +63,25 @@ export default function RepoConfig({hide}: IProps): React.FC<IProps> {
                 }}
             >
                 <Form>
-                    <label htmlFor="repo">Repository</label>
-                    <Field id="repo" name="repo" placeholder="Repository"/>
-                    <label htmlFor="token">Token</label>
-                    <Field id="token" name="token" placeholder="Token"/>
-                    <button type="submit">Submit</button>
+                    <div className={styles['form-container']}>
+                        <label htmlFor="repo">Repository</label>
+                        <Field id="repo" name="repo" placeholder="Repository"/>
+                        <span/>
+
+                        <label htmlFor="token">Token</label>
+                        <Field id="token" name="token" placeholder="Token"/>
+                        <span>
+                            <button type="submit">Test</button>
+                            <button type="submit">Save</button>
+                        </span>
+                    </div>
                 </Form>
             </Formik>
 
-            <button onClick={hide}>hide</button>
+            <div className={styles.footer}>
+                <button onClick={hide}>Done</button>
+            </div>
+
         </div>
         :
         <BarLoader loading={true} color='gray' width='100%'/>;

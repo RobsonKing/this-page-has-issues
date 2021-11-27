@@ -9,10 +9,15 @@
 - save:
   - token
   - repo name
+  - multiple repos
   - use token to fetch issues
   - clean up and share storage code
   - obfuscate token
   - add tool tip to how to get token
+- STYLES
+  - share styles
+  - is the site using dark mode?
+    - switch styles to dark mode
 - allow user to switch between configured repos
 - search limit... paging...
 - tests

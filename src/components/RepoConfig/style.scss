@@ -1,0 +1,29 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.form-container {
+  padding: 5px;
+  display: grid;
+  grid-template-columns: max-content max-content max-content;
+  grid-gap: 5px;
+}
+
+.form-container label {
+  font-weight: bold;
+  text-align: right;
+}
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
