@@ -195,6 +195,10 @@
     "sonarjs/cognitive-complexity": [
       "warn",
       32
+    ],
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": [
+      "error"
     ]
   }
 }

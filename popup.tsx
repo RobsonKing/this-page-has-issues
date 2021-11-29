@@ -17,6 +17,7 @@ const httpLink = createHttpLink({
     uri: 'https://api.github.com/graphql',
 });
 
+// todo rmk (28 Nov. 2021): cache token look up https://www.apollographql.com/docs/react/api/link/apollo-link-context/
 // todo rmk (18 Nov. 2021): get this from storage somehow...
 const token = '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';
 const authLink = setContext((_, {headers}) => {

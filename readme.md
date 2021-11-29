@@ -6,6 +6,9 @@
 - filter closed vs open issues
 - add extra search params
 - bring over: menu code
+- accessability
+  - tool tips
+  - alt text
 - save:
   - token
   - repo name
