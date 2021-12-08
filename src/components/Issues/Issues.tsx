@@ -3,12 +3,12 @@ import styles from './style.scss';
 import BarLoader from "react-spinners/BarLoader";
 import {useIssues} from "../../hooks/useIssues";
 
-interface IProps {
+interface Props {
     url: URL
     showConfig: () => void
 }
 
-export default function Issues({url, showConfig}: IProps): React.FC<IProps> {
+export default function Issues({url, showConfig}: Props): React.FC<Props> {
     const {loading, issues} = useIssues(url);
 
     return (

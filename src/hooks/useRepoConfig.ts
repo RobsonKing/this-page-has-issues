@@ -18,6 +18,7 @@ interface RepoConfigResult {
     isConfigLoading: boolean
     saveAndTestConfig: (values: RepoConfig) => void
     isConfigValid: RepoConfigState
+    apolloClientFactory: (config: RepoConfig) => ApolloClient<any>
 }
 
 // Reads all data out of storage.sync and exposes it via a promise.
@@ -49,6 +50,24 @@ const TEST_QUERY = gql`
     }
 `;
 
+function apolloClientFactory(config): ApolloClient<any> {
+    const httpLink = createHttpLink({
+        uri: 'https://api.github.com/graphql',
+    });
+    const authLink = setContext((_, {headers}) => {
+        return {
+            headers: {
+                ...headers,
+                authorization: `Bearer ${config.token}`,
+            }
+        };
+    });
+    return new ApolloClient({
+        link: authLink.concat(httpLink),
+        cache: new InMemoryCache()
+    });
+}
+
 export function useRepoConfig(): RepoConfigResult {
     const [config, setConfig] = useState(null);
     const isConfigLoading = config === null;
@@ -67,29 +86,11 @@ export function useRepoConfig(): RepoConfigResult {
     }, []);
 
     const [isConfigValid, setIsConfigValid] = useState(RepoConfigState.TESTING);
+
     useEffect(() => {
         setIsConfigValid(RepoConfigState.TESTING);
         if (!isConfigLoading) {
-            // todo rmk (28 Nov. 2021): can we pull this into another hook?
-            //  - or maybe just a helper function
-            const httpLink = createHttpLink({
-                uri: 'https://api.github.com/graphql',
-            });
-            const authLink = setContext((_, {headers}) => {
-                return {
-                    headers: {
-                        ...headers,
-                        authorization: `Bearer ${config.token}`,
-                    }
-                };
-            });
-            // todo rmk (28 Nov. 2021): should the hook return an apollo client?
-            //  - just return the variable?
-            const client = new ApolloClient({
-                link: authLink.concat(httpLink),
-                cache: new InMemoryCache()
-            });
-
+            const client = apolloClientFactory(config);
             client.query({query: TEST_QUERY, variables: {query: `repo:${config.repo}`}}).then((results) => {
                 console.log("*** success ***", results); // todo rmk (28 Nov. 2021): remove
                 setIsConfigValid(RepoConfigState.VALID);
@@ -111,6 +112,7 @@ export function useRepoConfig(): RepoConfigResult {
         config,
         isConfigLoading,
         saveAndTestConfig,
-        isConfigValid
+        isConfigValid,
+        apolloClientFactory
     };
 }
