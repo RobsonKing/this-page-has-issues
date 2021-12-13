@@ -10,7 +10,8 @@
     "plugin:promise/recommended",
     "plugin:sonarjs/recommended",
     "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "plugin:jsx-a11y/recommended"
     //    "plugin:@typescript-eslint/recommended-requiring-type-checking"
   ],
   "settings": {
@@ -31,7 +32,8 @@
     "promise",
     "optimize-regex",
     "sonarjs",
-    "@typescript-eslint"
+    "@typescript-eslint",
+    "jsx-a11y"
   ],
   "rules": {
     "no-shadow": [
