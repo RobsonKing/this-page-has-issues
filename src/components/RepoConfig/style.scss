@@ -27,3 +27,13 @@
   flex-direction: row;
   justify-content: flex-end;
 }
+
+.stay-on-hover {
+  font-size: 20px !important;
+  pointer-events: auto !important;
+
+  &:hover {
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+}

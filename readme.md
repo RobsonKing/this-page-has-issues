@@ -49,18 +49,17 @@ todo
   - menu item to get page url (so you can copy it to a bug)
   - menu item to log bug
   - copy URL and create bug
+  - bring over: menu code
 - preview issue  (just click on it?)
 - filter closed vs open issues (+)
 - add extra search params
-- bring over: menu code
-- accessability (+)
+- accessibility (+)
   - tool tips
   - alt text
 - save:
   - multiple repos
   - obfuscate token
   - is there somewhere better to store token
-  - add tool tip to how to get token (+)
 - STYLES
   - share styles
   - respect browser dark mode

@@ -4,6 +4,7 @@ interface CssExports {
   'container': string;
   'footer': string;
   'form-container': string;
+  'stay-on-hover': string;
   'title': string;
 }
 export const cssExports: CssExports;
