@@ -78,4 +78,3 @@ todo
   - search by page title
   - search by location on page (right click)
     - show tree of nodes? let the user select
-- error boundary (+)
