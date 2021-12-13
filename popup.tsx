@@ -36,7 +36,7 @@ import IssuesBrowser from "./src/components/IssuesBrowser/IssuesBrowser";
 // });
 
 const Popup = (): React.FC<null> => {
-    const [showConfig, setShowConfig] = useState(true);
+    const [showConfig, setShowConfig] = useState(false);
 
     if (showConfig) {
         return <RepoConfig hide={() => setShowConfig(false)}/>;

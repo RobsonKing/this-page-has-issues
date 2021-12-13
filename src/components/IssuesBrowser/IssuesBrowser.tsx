@@ -3,7 +3,8 @@ import {useEffect, useState} from "react";
 import BarLoader from "react-spinners/BarLoader";
 import {ApolloProvider} from "@apollo/client";
 import Issues from "../Issues/Issues";
-import {useRepoConfig} from "../../hooks/useRepoConfig";
+import {RepoConfigState, useRepoConfig} from "../../hooks/useRepoConfig";
+import InvalidConfig from "../InvalidConfig/InvalidConfig";
 
 interface Props {
     showConfig: () => void
@@ -19,6 +20,7 @@ export default function IssuesBrowser({showConfig}: Props): React.FC<Props> {
     const [url, setUrl] = useState<URL | null>(null);
     const {config, isConfigLoading, isConfigValid, apolloClientFactory} = useRepoConfig();
 
+    console.log("*** isConfigValid ***", isConfigValid); // todo rmk (12 Dec. 2021): remove
     useEffect(() => {
         const getData = async (): Promise<void> => {
             setUrl(await getCurrentUrl());
@@ -32,11 +34,8 @@ export default function IssuesBrowser({showConfig}: Props): React.FC<Props> {
     if (loadingUrl || isConfigLoading) {
         return <BarLoader loading={true} color='gray' width='100%'/>;
     }
-    if (!isConfigValid) {
-        // todo rmk (07 Dec. 2021):
-        return <div>
-            your config do not work... you should set that up
-        </div>;
+    if (isConfigValid === RepoConfigState.INVALID) {
+        return <InvalidConfig showConfig={showConfig}/>;
     }
 
     return <ApolloProvider client={apolloClientFactory(config)}>

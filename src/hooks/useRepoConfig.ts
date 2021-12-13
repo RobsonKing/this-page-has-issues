@@ -74,7 +74,6 @@ export function useRepoConfig(): RepoConfigResult {
     useEffect(() => {
         const getConfig = async (): Promise<void> => {
             let result = await getAllStorageSyncData<RepoConfig>();
-            console.log("*** getAllStorageSyncData ***", result); // todo rmk (25 Nov. 2021): remove
             if (!result || Object.keys(result).length === 0) {
                 result = {repo: '', token: ''};
             }
@@ -91,12 +90,11 @@ export function useRepoConfig(): RepoConfigResult {
         setIsConfigValid(RepoConfigState.TESTING);
         if (!isConfigLoading) {
             const client = apolloClientFactory(config);
-            client.query({query: TEST_QUERY, variables: {query: `repo:${config.repo}`}}).then((results) => {
-                console.log("*** success ***", results); // todo rmk (28 Nov. 2021): remove
+            client.query({query: TEST_QUERY, variables: {query: `repo:${config.repo}`}}).then(() => {
                 setIsConfigValid(RepoConfigState.VALID);
                 return true;
             }).catch((error) => {
-                console.log("*** failure ***", error); // todo rmk (28 Nov. 2021): remove
+                console.log("Failure to query:", error);
                 setIsConfigValid(RepoConfigState.INVALID);
             });
         }
