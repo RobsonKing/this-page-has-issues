@@ -4,8 +4,12 @@ interface CssExports {
   'avatar': string;
   'closed': string;
   'container': string;
+  'header': string;
   'issue': string;
+  'issue-double-col': string;
   'issue-list': string;
+  'issue-single-col': string;
+  'issue-title': string;
   'issue-warning': string;
   'open': string;
   'title': string;

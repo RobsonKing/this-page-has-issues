@@ -32,6 +32,31 @@
   color: purple;
 }
 
+.header {
+  display: flex;
+  border-style: solid;
+  border-width: 1px;
+  border-color: lightgrey;
+  padding: 5px;
+}
+
+.header span {
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.issue-single-col {
+  flex: 1;
+}
+
+.issue-double-col {
+  flex: 2;
+}
+
+.issue-title {
+  flex: 5;
+}
+
 .avatar {
   width: 25px
 }
