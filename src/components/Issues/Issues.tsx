@@ -33,11 +33,11 @@ export default function Issues({url, showConfig}: Props): React.FC<Props> {
                     </div>
                     <div className={styles.title}>Issues</div>
 
-                    <ReactTooltip id='openIssue' type="success" effect="solid" place="right">
+                    <ReactTooltip id='openIssue' type="warning" effect="solid" place="right">
                         Issue is open
                     </ReactTooltip>
-                    <ReactTooltip id='openIssue' type="success" effect="solid" place="right">
-                        Issue is open
+                    <ReactTooltip id='closedIssue' type="success" effect="solid" place="right">
+                        Issue is closed
                     </ReactTooltip>
 
 
@@ -46,6 +46,7 @@ export default function Issues({url, showConfig}: Props): React.FC<Props> {
                         {issues.length === 0 && <div className={styles["issue-warning"]}>No issues found</div>}
                         {issues.map((issue) => <div className={styles.issue} key={issue.number}>
                             <div
+                                data-tip data-for={issue.isOpen ? 'openIssue' : 'closedIssue'}
                                 className={classNames([issue.isOpen ? styles.open : styles.closed, styles[SINGLE_COLUMN]])}>
                                 {issue.number}
                             </div>

@@ -64,10 +64,9 @@ todo
     - switch styles to dark mode
 - allow user to switch between configured repos
 - search limit... paging... (+)
-- tests (+)
+  - tests (+)
 - fields to add :
-  * issue assigned to (+)
-  * avatar (+)
+  * issue assigned to
 - group by bug, issues, etc
 - alias routes (vs vs as)
 - search options

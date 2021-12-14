@@ -26,7 +26,6 @@ export default class IssueModel {
         return this.issue.milestone?.title;
     }
 
-    // todo: closed, fixed...
     get isOpen(): boolean {
         return this.issue.state === IssueState.OPEN;
     }
