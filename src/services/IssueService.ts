@@ -10,7 +10,7 @@ const PAGE = "*PAGE*";
 
 const ISSUE_QUERY = gql`
     query GetIssues($first : Int!, $query: String!){
-        search(first: $first, query: $query,type:ISSUE){
+        search(first: $first, query: $query, type:ISSUE){
             nodes{
                 ... on Issue{
                     number
@@ -42,7 +42,7 @@ export default class IssueService {
     getQueryParams(url): { first: number; query: string } {
         const repo = "atvenu/atvenu";
         const urlSearchString = this.buildPageSearchString(url);
-        const query = `repo:${repo} "start(${PAGE})end"`;
+        const query = `repo:${repo} is:issue "start(${PAGE})end"`;
         const pageQuery = query.replace(PAGE, urlSearchString);
         return {
             first: 10,
