@@ -14,6 +14,14 @@ export default class IssueModel {
         return this.issue.number;
     }
 
+    get avatarUrl(): string {
+        return this.issue.author.avatarUrl;
+    }
+
+    get author(): string {
+        return this.issue.author.login;
+    }
+
     get milestone(): string {
         return this.issue.milestone?.title;
     }

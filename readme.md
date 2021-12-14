@@ -28,8 +28,8 @@ So if you change/add a query regenerate the types!
 Update the schema file by downloading from:
 https://docs.github.com/en/graphql/overview/public-schema
 
-Build the types for the queries you are using npx apollo:
-`client:codegen --localSchemaFile schema.docs.graphql --target typescript --includes 'src/**/*.{ts,tsx}'`
+Build the types for the queries you are using
+`npx apollo client:codegen --localSchemaFile schema.docs.graphql --target typescript --includes 'src/**/*.{ts,tsx}'`
 
 ## Production
 

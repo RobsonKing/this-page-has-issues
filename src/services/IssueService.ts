@@ -21,6 +21,7 @@ const ISSUE_QUERY = gql`
                     title
                     author{
                         login
+                        avatarUrl
                     }
                     url
                 }

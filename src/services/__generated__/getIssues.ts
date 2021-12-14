@@ -27,6 +27,10 @@ export interface GetIssues_search_nodes_Issue_author {
    * The username of the actor.
    */
   login: string;
+  /**
+   * A URL pointing to the actor's public avatar.
+   */
+  avatarUrl: any;
 }
 
 export interface GetIssues_search_nodes_Issue {
