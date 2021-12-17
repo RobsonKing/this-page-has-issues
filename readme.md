@@ -51,7 +51,6 @@ todo
   - copy URL and create bug
   - bring over: menu code
 - preview issue  (just click on it?)
-- filter closed vs open issues (+)
 - add extra search params
 - save:
   - multiple repos

@@ -21,9 +21,8 @@ const IssueHeader = (): React.FC => {
 };
 
 export default function Issues({url, showConfig}: Props): React.FC<Props> {
-    const {loading, issues} = useIssues(url);
+    const {loading, issues, filters, setOpenFilter, setClosedFilter} = useIssues(url);
 
-    // todo rmk (13 Dec. 2021): tooltips for open closed, whatever the other status is?
     return (
         <div className={styles.container}>
             {loading ? <BarLoader loading={true} color='gray' width='100%'/> :
@@ -40,7 +39,29 @@ export default function Issues({url, showConfig}: Props): React.FC<Props> {
                         Issue is closed
                     </ReactTooltip>
 
-
+                    {/*todo create component for filters*/}
+                    <div>
+                        <label>
+                            Open
+                            <input
+                                name="open"
+                                type="checkbox"
+                                checked={filters.showOpenIssues}
+                                onChange={(event) => {
+                                    setOpenFilter(event.target.checked);
+                                }}/>
+                        </label>
+                        <label>
+                            Closed
+                            <input
+                                name="closed"
+                                type="checkbox"
+                                checked={filters.showClosedIssues}
+                                onChange={(event) => {
+                                    setClosedFilter(event.target.checked);
+                                }}/>
+                        </label>
+                    </div>
                     <div className={styles["issue-list"]}>
                         <IssueHeader/>
                         {issues.length === 0 && <div className={styles["issue-warning"]}>No issues found</div>}

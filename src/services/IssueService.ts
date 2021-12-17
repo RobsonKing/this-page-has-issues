@@ -40,10 +40,10 @@ export default class IssueService {
         return `${url.pathname}${url.search}`.replace(/\d+/g, 'x');
     }
 
-    getQueryParams(url): { first: number; query: string } {
+    getQueryParams(url, filters: { showOpenIssues: boolean; showClosedIssues: boolean }): { first: number; query: string } {
         const repo = "atvenu/atvenu";
         const urlSearchString = this.buildPageSearchString(url);
-        const query = `repo:${repo} is:issue "start(${PAGE})end"`;
+        const query = `repo:${repo} is:issue ${this.getStatusFilter(filters)} "start(${PAGE})end"`;
         const pageQuery = query.replace(PAGE, urlSearchString);
         return {
             first: 10,
@@ -53,6 +53,18 @@ export default class IssueService {
 
     getIssueQueryForCurrentPage(): DocumentNode {
         return ISSUE_QUERY;
+    }
+
+    private getStatusFilter(filters): string {
+        console.log("*** filters ***", filters); // todo rmk (16 Dec. 2021): remove
+        let result = "";
+        if (!filters.showClosedIssues && filters.showOpenIssues) {
+            result = "is:open";
+        } else if (!filters.showOpenIssues && filters.showClosedIssues) {
+            result = "is:closed";
+        }
+
+        return result;
     }
 }
 
