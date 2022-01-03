@@ -29,6 +29,12 @@ const ISSUE_QUERY = gql`
         }
     }`;
 
+export interface Filters {
+    showOpenIssues: boolean
+    showClosedIssues: boolean
+}
+
+
 export default class IssueService {
 
     /*
@@ -40,7 +46,7 @@ export default class IssueService {
         return `${url.pathname}${url.search}`.replace(/\d+/g, 'x');
     }
 
-    getQueryParams(url, filters: { showOpenIssues: boolean; showClosedIssues: boolean }): { first: number; query: string } {
+    getQueryParams(url, filters: Filters): { first: number; query: string } {
         // todo rmk (27 Dec. 2021):  hard coded to a repo!!!
 
         return {
@@ -49,16 +55,14 @@ export default class IssueService {
         };
     }
 
-    // filters needs a type
-    getQuery(url, filters: { showOpenIssues: boolean; showClosedIssues: boolean }): string {
+    getQuery(url, filters: Filters): string {
         const repo = "atvenu/atvenu";
         const urlSearchString = this.buildPageSearchString(url);
         const query = `repo:${repo} is:issue ${this.getStatusFilter(filters)} "start(${PAGE})end"`;
         return query.replace(PAGE, urlSearchString);
     }
 
-
-    getQueryParamsAsString(url, filters: { showOpenIssues: boolean; showClosedIssues: boolean }): string {
+    getQueryParamsAsString(url, filters: Filters): string {
         //building this ?q=is%3Aissue+is%3Aopen+refund
         return encodeURI(this.getQuery(url, filters).replace(' ', '+'));
     }
@@ -68,7 +72,6 @@ export default class IssueService {
     }
 
     private getStatusFilter(filters): string {
-        console.log("*** filters ***", filters); // todo rmk (16 Dec. 2021): remove
         let result = "";
         if (!filters.showClosedIssues && filters.showOpenIssues) {
             result = "is:open";

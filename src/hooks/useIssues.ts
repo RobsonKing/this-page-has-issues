@@ -1,5 +1,5 @@
 import {useQuery} from "@apollo/client";
-import IssueService from "../services/IssueService";
+import IssueService, {Filters} from "../services/IssueService";
 import IssueModel from "../models/IssueModel";
 import {GetIssues, GetIssues_search_nodes_Issue, GetIssuesVariables} from "../services/__generated__/getIssues";
 import {useState} from "react";
@@ -7,10 +7,7 @@ import {useState} from "react";
 interface Return {
     loading: boolean
     issues: IssueModel[]
-    filters: {
-        showOpenIssues: boolean
-        showClosedIssues: boolean
-    }
+    filters: Filters
     search: string
     setOpenFilter: (boolean) => void
     setClosedFilter: (boolean) => void
