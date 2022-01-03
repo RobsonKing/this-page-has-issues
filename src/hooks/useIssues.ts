@@ -1,16 +1,21 @@
 import {useQuery} from "@apollo/client";
-import IssueService, {Filters} from "../services/IssueService";
+import IssueService from "../services/IssueService";
 import IssueModel from "../models/IssueModel";
 import {GetIssues, GetIssues_search_nodes_Issue, GetIssuesVariables} from "../services/__generated__/getIssues";
 import {useState} from "react";
+
+export interface Filters {
+    showOpenIssues: boolean
+    showClosedIssues: boolean
+    setOpenFilter: (boolean) => void
+    setClosedFilter: (boolean) => void
+}
 
 interface Return {
     loading: boolean
     issues: IssueModel[]
     filters: Filters
     search: string
-    setOpenFilter: (boolean) => void
-    setClosedFilter: (boolean) => void
 }
 
 export const useIssues = (url: URL): Return => {
@@ -34,16 +39,18 @@ export const useIssues = (url: URL): Return => {
     return {
         loading,
         issues,
-        filters,
+        filters: {
+            ...filters,
+            setOpenFilter: (value) => setFilters({
+                ...filters,
+                showOpenIssues: value
+            }),
+            setClosedFilter: (value) => setFilters({
+                ...filters,
+                showClosedIssues: value
+            }),
+        },
         search: issueService.getQueryParamsAsString(url, filters),
-        setOpenFilter: (value) => setFilters({
-            ...filters,
-            showOpenIssues: value
-        }),
-        setClosedFilter: (value) => setFilters({
-            ...filters,
-            showClosedIssues: value
-        }),
     };
 };
 

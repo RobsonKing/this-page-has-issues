@@ -5,6 +5,7 @@ import {useIssues} from "../../hooks/useIssues";
 import ReactTooltip from "react-tooltip";
 import classNames from "classnames";
 import {RepoConfig} from "../../hooks/useRepoConfig";
+import {FilterBar} from "../FilterBar/FilterBar";
 
 interface Props {
     url: URL
@@ -23,7 +24,7 @@ const IssueHeader = (): React.FC => {
 };
 
 export default function Issues({url, showConfig, config}: Props): React.FC<Props> {
-    const {loading, issues, filters, search, setOpenFilter, setClosedFilter} = useIssues(url);
+    const {loading, issues, filters, search} = useIssues(url);
 
     return (
         <div className={styles.container}>
@@ -32,7 +33,7 @@ export default function Issues({url, showConfig, config}: Props): React.FC<Props
                     <div>
                         <button onClick={showConfig}>config...</button>
                     </div>
-                    <div className={styles.title}>Issues</div>
+                    <div className={styles.title}>Issues on Page</div>
 
                     <ReactTooltip id='openIssue' type="warning" effect="solid" place="right">
                         Issue is open
@@ -41,29 +42,7 @@ export default function Issues({url, showConfig, config}: Props): React.FC<Props
                         Issue is closed
                     </ReactTooltip>
 
-                    {/*todo create component for filters*/}
-                    <div>
-                        <label>
-                            Open
-                            <input
-                                name="open"
-                                type="checkbox"
-                                checked={filters.showOpenIssues}
-                                onChange={(event) => {
-                                    setOpenFilter(event.target.checked);
-                                }}/>
-                        </label>
-                        <label>
-                            Closed
-                            <input
-                                name="closed"
-                                type="checkbox"
-                                checked={filters.showClosedIssues}
-                                onChange={(event) => {
-                                    setClosedFilter(event.target.checked);
-                                }}/>
-                        </label>
-                    </div>
+                    <FilterBar filters={filters}/>
                     <div className={styles["issue-list"]}>
                         <IssueHeader/>
                         {issues.length === 0 && <div className={styles["issue-warning"]}>No issues found</div>}

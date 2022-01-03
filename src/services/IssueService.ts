@@ -29,7 +29,7 @@ const ISSUE_QUERY = gql`
         }
     }`;
 
-export interface Filters {
+interface Filters {
     showOpenIssues: boolean
     showClosedIssues: boolean
 }
@@ -47,8 +47,6 @@ export default class IssueService {
     }
 
     getQueryParams(url, filters: Filters): { first: number; query: string } {
-        // todo rmk (27 Dec. 2021):  hard coded to a repo!!!
-
         return {
             first: 10,
             query: this.getQuery(url, filters)
@@ -56,6 +54,7 @@ export default class IssueService {
     }
 
     getQuery(url, filters: Filters): string {
+        // todo rmk (27 Dec. 2021):  hard coded to a repo!!!
         const repo = "atvenu/atvenu";
         const urlSearchString = this.buildPageSearchString(url);
         const query = `repo:${repo} is:issue ${this.getStatusFilter(filters)} "start(${PAGE})end"`;
