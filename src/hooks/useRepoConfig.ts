@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {ApolloClient, createHttpLink, gql, InMemoryCache} from "@apollo/client";
 import {setContext} from "@apollo/client/link/context";
 
-interface RepoConfig {
+export interface RepoConfig {
     repo: string
     token: string
 }

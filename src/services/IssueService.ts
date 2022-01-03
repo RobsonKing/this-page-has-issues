@@ -41,14 +41,26 @@ export default class IssueService {
     }
 
     getQueryParams(url, filters: { showOpenIssues: boolean; showClosedIssues: boolean }): { first: number; query: string } {
+        // todo rmk (27 Dec. 2021):  hard coded to a repo!!!
+
+        return {
+            first: 10,
+            query: this.getQuery(url, filters)
+        };
+    }
+
+    // filters needs a type
+    getQuery(url, filters: { showOpenIssues: boolean; showClosedIssues: boolean }): string {
         const repo = "atvenu/atvenu";
         const urlSearchString = this.buildPageSearchString(url);
         const query = `repo:${repo} is:issue ${this.getStatusFilter(filters)} "start(${PAGE})end"`;
-        const pageQuery = query.replace(PAGE, urlSearchString);
-        return {
-            first: 10,
-            query: pageQuery
-        };
+        return query.replace(PAGE, urlSearchString);
+    }
+
+
+    getQueryParamsAsString(url, filters: { showOpenIssues: boolean; showClosedIssues: boolean }): string {
+        //building this ?q=is%3Aissue+is%3Aopen+refund
+        return encodeURI(this.getQuery(url, filters).replace(' ', '+'));
     }
 
     getIssueQueryForCurrentPage(): DocumentNode {

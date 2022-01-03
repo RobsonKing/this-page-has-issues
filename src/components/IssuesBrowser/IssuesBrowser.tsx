@@ -39,6 +39,6 @@ export default function IssuesBrowser({showConfig}: Props): React.FC<Props> {
     }
 
     return <ApolloProvider client={apolloClientFactory(config)}>
-        <Issues url={url} showConfig={showConfig}/>
+        <Issues url={url} showConfig={showConfig} config={config}/>
     </ApolloProvider>;
 }

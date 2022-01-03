@@ -40,8 +40,9 @@ Build the types for the queries you are using
 todo
 
 ## How to see errors in Chrome
+To use the Chrome dev tools, right click on the extension icon and choose inspect popup
 
-todo
+-----
 
 ## Todo: Ideas
 
@@ -62,8 +63,12 @@ todo
   - is the site using dark mode?
     - switch styles to dark mode
 - allow user to switch between configured repos
-- search limit... paging... (+)
-  - tests (+)
+- search limit...
+  - paging... (+)
+  - issue count (+)
+  - has more (+)
+  - next, previous (+)
+- tests (+)
 - fields to add :
   * issue assigned to
 - group by bug, issues, etc

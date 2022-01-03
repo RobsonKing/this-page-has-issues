@@ -4,10 +4,12 @@ import BarLoader from "react-spinners/BarLoader";
 import {useIssues} from "../../hooks/useIssues";
 import ReactTooltip from "react-tooltip";
 import classNames from "classnames";
+import {RepoConfig} from "../../hooks/useRepoConfig";
 
 interface Props {
     url: URL
     showConfig: () => void
+    config: RepoConfig
 }
 
 const SINGLE_COLUMN = 'issue-single-col';
@@ -20,8 +22,8 @@ const IssueHeader = (): React.FC => {
     </div>;
 };
 
-export default function Issues({url, showConfig}: Props): React.FC<Props> {
-    const {loading, issues, filters, setOpenFilter, setClosedFilter} = useIssues(url);
+export default function Issues({url, showConfig, config}: Props): React.FC<Props> {
+    const {loading, issues, filters, search, setOpenFilter, setClosedFilter} = useIssues(url);
 
     return (
         <div className={styles.container}>
@@ -89,6 +91,15 @@ export default function Issues({url, showConfig}: Props): React.FC<Props> {
                                 </a>
                             </div>
                         </div>)}
+                        <div style={{
+                            flex: 6, padding: 10,
+                        }}>
+                            <span>
+                                Search on <a
+                                target="_blank" rel="noreferrer"
+                                href={`https://github.com/${config.repo}/issues?q=${search}`}>github</a>
+                            </span>
+                        </div>
                     </div>
                 </>
             }

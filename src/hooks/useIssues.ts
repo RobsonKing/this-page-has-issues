@@ -11,6 +11,7 @@ interface Return {
         showOpenIssues: boolean
         showClosedIssues: boolean
     }
+    search: string
     setOpenFilter: (boolean) => void
     setClosedFilter: (boolean) => void
 }
@@ -37,6 +38,7 @@ export const useIssues = (url: URL): Return => {
         loading,
         issues,
         filters,
+        search: issueService.getQueryParamsAsString(url, filters),
         setOpenFilter: (value) => setFilters({
             ...filters,
             showOpenIssues: value
