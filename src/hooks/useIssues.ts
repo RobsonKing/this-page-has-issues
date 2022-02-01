@@ -9,6 +9,9 @@ export interface Filters {
     showClosedIssues: boolean
     setOpenFilter: (boolean) => void
     setClosedFilter: (boolean) => void
+
+    searchOption: SearchOption
+    setSearchOption: (SearchOption) => void
 }
 
 interface Return {
@@ -18,6 +21,11 @@ interface Return {
     search: string
 }
 
+export enum SearchOption {
+    PARTIAL = "partial",
+    FULL = "full",
+}
+
 export const useIssues = (url: URL): Return => {
     let issues = [];
     const issueService = new IssueService();
@@ -25,6 +33,7 @@ export const useIssues = (url: URL): Return => {
         showOpenIssues: true,
         showClosedIssues: true
     });
+    const [searchOption, setSearchOption] = useState(SearchOption.FULL);
 
     const {loading, data, error} = useQuery<GetIssues, GetIssuesVariables>(
         issueService.getIssueQueryForCurrentPage(),
@@ -49,6 +58,8 @@ export const useIssues = (url: URL): Return => {
                 ...filters,
                 showClosedIssues: value
             }),
+            searchOption,
+            setSearchOption
         },
         search: issueService.getQueryParamsAsString(url, filters),
     };

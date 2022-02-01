@@ -1,5 +1,6 @@
 import * as React from "react";
-import {Filters} from "../../hooks/useIssues";
+import {Filters, SearchOption} from "../../hooks/useIssues";
+import styles from './style.scss';
 
 interface Props {
     filters: Filters
@@ -10,7 +11,9 @@ export function FilterBar({
                                   showOpenIssues,
                                   setOpenFilter,
                                   showClosedIssues,
-                                  setClosedFilter
+                                  setClosedFilter,
+                                  searchOption,
+                                  setSearchOption,
                               }
                           }: Props): React.FC<Props> {
     return <div>
@@ -33,6 +36,31 @@ export function FilterBar({
                 onChange={(event) => {
                     setClosedFilter(event.target.checked);
                 }}/>
+        </label>
+        <span className={styles['exact-label']}>Search by: </span>
+        <label>
+            Full Url
+            <input
+                value={SearchOption.FULL}
+                name="match"
+                type="radio"
+                checked={searchOption === SearchOption.FULL}
+                onChange={(event) => {
+                    setSearchOption(event.target.value);
+                }}
+            />
+        </label>
+        <label>
+            Partial Url
+            <input
+                value={SearchOption.PARTIAL}
+                name="match"
+                type="radio"
+                checked={searchOption === SearchOption.PARTIAL}
+                onChange={(event) => {
+                    setSearchOption(event.target.value);
+                }}
+            />
         </label>
     </div>;
 }
