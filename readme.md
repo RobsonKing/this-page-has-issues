@@ -74,7 +74,6 @@ To use the Chrome dev tools, right click on the extension icon and choose inspec
 - group by bug, issues, etc
 - alias routes (vs vs as)
 - search options
-    - fall back to wild card search (+)
     - search by page title
     - search by location on page (right click)
       - show tree of nodes? let the user select

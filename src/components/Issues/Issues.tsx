@@ -24,7 +24,7 @@ const IssueHeader = (): React.FC => {
 };
 
 export default function Issues({url, showConfig, config}: Props): React.FC<Props> {
-    const {loading, issues, filters, search} = useIssues(url);
+    const {loading, issues, filters, search} = useIssues(url, config.repo);
 
     return (
         <div className={styles.container}>

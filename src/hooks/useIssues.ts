@@ -21,7 +21,7 @@ interface Return {
     search: string
 }
 
-export const useIssues = (url: URL): Return => {
+export const useIssues = (url: URL, repo: string): Return => {
     let issues = [];
     const issueService = new IssueService();
     const [filters, setFilters] = useState({
@@ -32,7 +32,7 @@ export const useIssues = (url: URL): Return => {
 
     const {loading, data, error} = useQuery<GetIssues, GetIssuesVariables>(
         issueService.getIssueQueryForCurrentPage(),
-        {variables: issueService.getQueryParams(url, filters, searchOption)}
+        {variables: issueService.getQueryParams(url, repo, filters, searchOption)}
     );
     if (error) {
         console.log("Failed to query", error);
@@ -56,7 +56,7 @@ export const useIssues = (url: URL): Return => {
             searchOption,
             setSearchOption
         },
-        search: issueService.getQueryParamsAsString(url, filters, searchOption),
+        search: issueService.getQueryParamsAsString(url, repo, filters, searchOption),
     };
 };
 

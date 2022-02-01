@@ -57,22 +57,20 @@ export default class IssueService {
         return "";
     }
 
-    getQueryParams(url, filters: Filters, searchOption: SearchOption): { first: number; query: string } {
+    getQueryParams(url, repo: string, filters: Filters, searchOption: SearchOption): { first: number; query: string } {
         return {
             first: 10,
-            query: this.getQuery(url, filters, searchOption)
+            query: this.getQuery(url, repo, filters, searchOption)
         };
     }
 
-    getQuery(url, filters: Filters, searchOption: SearchOption): string {
-        // todo rmk (27 Dec. 2021):  hard coded to a repo!!!
-        const repo = "atvenu/atvenu";
+    getQuery(url, repo: string, filters: Filters, searchOption: SearchOption): string {
         return `repo:${repo} is:issue ${this.getStatusFilter(filters)} "${this.buildPageSearchString(url, searchOption)}"`;
     }
 
-    getQueryParamsAsString(url, filters: Filters, searchOption: SearchOption): string {
+    getQueryParamsAsString(url, repo: string, filters: Filters, searchOption: SearchOption): string {
         //building this ?q=is%3Aissue+is%3Aopen+refund
-        return encodeURI(this.getQuery(url, filters, searchOption).replace(' ', '+'));
+        return encodeURI(this.getQuery(url, repo, filters, searchOption).replace(' ', '+'));
     }
 
     getIssueQueryForCurrentPage(): DocumentNode {
