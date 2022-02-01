@@ -1,5 +1,5 @@
 import {useQuery} from "@apollo/client";
-import IssueService from "../services/IssueService";
+import IssueService, {SearchOption} from "../services/IssueService";
 import IssueModel from "../models/IssueModel";
 import {GetIssues, GetIssues_search_nodes_Issue, GetIssuesVariables} from "../services/__generated__/getIssues";
 import {useState} from "react";
@@ -21,11 +21,6 @@ interface Return {
     search: string
 }
 
-export enum SearchOption {
-    PARTIAL = "partial",
-    FULL = "full",
-}
-
 export const useIssues = (url: URL): Return => {
     let issues = [];
     const issueService = new IssueService();
@@ -37,7 +32,7 @@ export const useIssues = (url: URL): Return => {
 
     const {loading, data, error} = useQuery<GetIssues, GetIssuesVariables>(
         issueService.getIssueQueryForCurrentPage(),
-        {variables: issueService.getQueryParams(url, filters)}
+        {variables: issueService.getQueryParams(url, filters, searchOption)}
     );
     if (error) {
         console.log("Failed to query", error);
@@ -61,7 +56,7 @@ export const useIssues = (url: URL): Return => {
             searchOption,
             setSearchOption
         },
-        search: issueService.getQueryParamsAsString(url, filters),
+        search: issueService.getQueryParamsAsString(url, filters, searchOption),
     };
 };
 

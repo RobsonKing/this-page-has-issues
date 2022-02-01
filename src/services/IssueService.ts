@@ -1,6 +1,5 @@
 import {DocumentNode, gql} from "@apollo/client";
 
-const PAGE = "*PAGE*";
 //https://docs.github.com/en/search-github/searching-on-github/searching-issues-and-pull-requests
 // todo rmk (10 Nov. 2021): is:open  OPTIONAL ARGUMENTS!
 // todo rmk (10 Nov. 2021):sort https://docs.github.com/en/search-github/getting-started-with-searching-on-github/sorting-search-results
@@ -34,36 +33,46 @@ interface Filters {
     showClosedIssues: boolean
 }
 
+export enum SearchOption {
+    PARTIAL = "partial",
+    FULL = "full",
+}
 
 export default class IssueService {
 
     /*
     * all ids replaced with 'x'
-    * looks something like: /place/thing/x/reports/?id=x
+    * looks something like: start(/place/thing/x/reports/?id=x)end
+    * looks something like: /place/thing/  * /reports/?id=*
     */
-    buildPageSearchString(url): string {
-        // todo rmk (12 Nov. 2021):this is where options to make the search string will go
-        return `${url.pathname}${url.search}`.replace(/\d+/g, 'x');
+    buildPageSearchString(url, searchOption: SearchOption): string {
+        console.log("*** searchOption ***", searchOption); // todo rmk (31 Jan. 2022): remove
+        if (searchOption === SearchOption.FULL) {
+            return `start(${url.pathname}${url.search})end`.replace(/\d+/g, 'x');
+        }
+        if (searchOption === SearchOption.PARTIAL) {
+            return `${url.pathname}${url.search}`.replace(/\d+/g, '*');
+        }
+        // todo rmk (31 Jan. 2022): default? throw?
+        return "";
     }
 
-    getQueryParams(url, filters: Filters): { first: number; query: string } {
+    getQueryParams(url, filters: Filters, searchOption: SearchOption): { first: number; query: string } {
         return {
             first: 10,
-            query: this.getQuery(url, filters)
+            query: this.getQuery(url, filters, searchOption)
         };
     }
 
-    getQuery(url, filters: Filters): string {
+    getQuery(url, filters: Filters, searchOption: SearchOption): string {
         // todo rmk (27 Dec. 2021):  hard coded to a repo!!!
         const repo = "atvenu/atvenu";
-        const urlSearchString = this.buildPageSearchString(url);
-        const query = `repo:${repo} is:issue ${this.getStatusFilter(filters)} "start(${PAGE})end"`;
-        return query.replace(PAGE, urlSearchString);
+        return `repo:${repo} is:issue ${this.getStatusFilter(filters)} "${this.buildPageSearchString(url, searchOption)}"`;
     }
 
-    getQueryParamsAsString(url, filters: Filters): string {
+    getQueryParamsAsString(url, filters: Filters, searchOption: SearchOption): string {
         //building this ?q=is%3Aissue+is%3Aopen+refund
-        return encodeURI(this.getQuery(url, filters).replace(' ', '+'));
+        return encodeURI(this.getQuery(url, filters, searchOption).replace(' ', '+'));
     }
 
     getIssueQueryForCurrentPage(): DocumentNode {

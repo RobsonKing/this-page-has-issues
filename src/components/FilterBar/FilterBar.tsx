@@ -1,6 +1,7 @@
 import * as React from "react";
-import {Filters, SearchOption} from "../../hooks/useIssues";
+import {Filters} from "../../hooks/useIssues";
 import styles from './style.scss';
+import {SearchOption} from "../../services/IssueService";
 
 interface Props {
     filters: Filters
