@@ -1,4 +1,4 @@
-# Getting Started
+#This page has Issues
 
 ## Install
 
@@ -37,7 +37,12 @@ Build the types for the queries you are using
 
 ## Install in Chrome
 
-todo
+1. Build for production
+2. Navigate to chrome://extensions/
+3. Click 'Load Unpacked'
+4. Select your 'dist folder'
+
+Plug in should ot be available, if you want to always see it on your toolbar, you can pin it.
 
 ## How to see errors in Chrome
 To use the Chrome dev tools, right click on the extension icon and choose inspect popup
