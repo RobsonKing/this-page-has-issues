@@ -31,9 +31,9 @@ export default function Issues({url, showConfig, config}: Props): React.FC<Props
             {loading ? <BarLoader loading={true} color='gray' width='100%'/> :
                 <>
                     <div>
+                        <h1>This Page Has Issues</h1>
                         <button onClick={showConfig}>config...</button>
                     </div>
-                    <div className={styles.title}>Issues on Page</div>
 
                     <ReactTooltip id='openIssue' type="warning" effect="solid" place="right">
                         Issue is open
