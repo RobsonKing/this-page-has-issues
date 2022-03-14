@@ -79,6 +79,12 @@ To use the Chrome dev tools, right click on the extension icon and choose inspec
 - group by bug, issues, etc
 - alias routes (vs vs as)
 - search options
+    - save search options (+) 
     - search by page title
     - search by location on page (right click)
       - show tree of nodes? let the user select
+- dark mode (+)
+  - button color
+  - text field color
+  - option to turn off.
+  - save setting to extension storage.
