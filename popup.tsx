@@ -15,6 +15,7 @@ const Popup = (): React.FC<null> => {
     return <IssuesBrowser showConfig={() => setShowConfig(true)}/>;
 };
 
+// todo rmk (13 Mar. 2022): investigate proper way to include global styles.
 ReactDOM.render(
     <ErrorBoundary>
         <Popup className={styles.root}/>

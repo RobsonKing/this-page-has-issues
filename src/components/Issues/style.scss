@@ -1,3 +1,6 @@
+$color-btn-primary-bg: #2da44e;
+$color-btn-primary-hover-bg: #2c974b;
+
 .container {
   display: flex;
   flex-direction: column;
@@ -63,4 +66,16 @@
 
 .avatar {
   width: 25px
+}
+
+button {
+  color: white;
+  padding: 3px 12px;
+  background-color: $color-btn-primary-bg ;
+  border-radius: 6px;
+  border-width: 1px;
+  border-color: rgba(27,31,36,0.15);
+  &:hover{
+    background-color: $color-btn-primary-hover-bg;
+  }
 }

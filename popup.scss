@@ -16,6 +16,15 @@ a {
   body a {
     color: #809fff;
   }
+
+  input {
+    color: var(--color);
+    background: var(--color);
+    border-color: #30363d;
+  }
+  input:focus{
+    border-color: #1f6feb;
+  }
 }
 
 .root{
