@@ -21,20 +21,14 @@ interface RepoConfigResult {
     apolloClientFactory: (config: RepoConfig) => ApolloClient<any>
 }
 
-// Reads all data out of storage.sync and exposes it via a promise.
-//
 // Note: Once the Storage API gains promise support, this function
 // can be greatly simplified.
-function getAllStorageSyncData<TConfig>(): Promise<TConfig> {
-    // Immediately return a promise and start asynchronous work
+function getKeysFromSyncStorage<TConfig>(keys:string[]): Promise<TConfig> {
     return new Promise((resolve, reject) => {
-        // Asynchronously fetch all data from storage.sync.
-        chrome.storage.sync.get(null, (items) => {
-            // Pass any observed errors down the promise chain.
+        chrome.storage.sync.get(keys, (items) => {
             if (chrome.runtime.lastError) {
                 return reject(chrome.runtime.lastError);
             }
-            // Pass the data retrieved from storage down the promise chain.
             resolve(items);
         });
     });
@@ -73,7 +67,7 @@ export function useRepoConfig(): RepoConfigResult {
     const isConfigLoading = config === null;
     useEffect(() => {
         const getConfig = async (): Promise<void> => {
-            let result = await getAllStorageSyncData<RepoConfig>();
+            let result = await getKeysFromSyncStorage<RepoConfig>(["repo","token"]);
             if (!result || Object.keys(result).length === 0) {
                 result = {repo: '', token: ''};
             }
