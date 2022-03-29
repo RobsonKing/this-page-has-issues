@@ -75,19 +75,49 @@ interface SavedSettings {
     setSearchOption: (SearchOption) => void
 }
 
+export interface SavedStorageSettings {
+    filters: IssueFilter
+    searchOption: SearchOption
+}
+
 export function useSavedSettings(): SavedSettings {
-    const [filters, setFilters] = useState({
-        showOpenIssues: true,
-        showClosedIssues: true,
-    });
-    const [searchOption, setSearchOption] = useState(SearchOption.FULL);
-    // todo: get from storage
+    const [filters, setFilters] = useState(null);
+    const [searchOption, setSearchOption] = useState(null);
+    const loading = filters === null || searchOption === null;
+    useEffect(() => {
+       const getSettingsFromStorage = async (): Promise<void> => {
+           let result = await getKeysFromSyncStorage<SavedStorageSettings>(["filters","searchOption"]);
+           if (!result || Object.keys(result).length === 0) {
+               result = { };
+           }
+           setFilters(result.filters || {
+                   showOpenIssues: true,
+                   showClosedIssues: false
+               });
+           setSearchOption(result.searchOption || SearchOption.FULL);
+       };
+
+       // noinspection JSIgnoredPromiseFromCall
+       getSettingsFromStorage();
+    },[]);
+
+    const saveSearchOption = (value: SearchOption): void => {
+        chrome.storage.sync.set({searchOption: value}, () => {
+            setSearchOption(value);
+        });
+    };
+    const saveSearchFilters = (value: IssueFilter): void => {
+        chrome.storage.sync.set({filters: value}, () => {
+            setFilters(value);
+        });
+    };
+
     return {
-        loading: false,
+        loading,
         filters,
-        setFilters,
+        setFilters: saveSearchFilters,
         searchOption,
-        setSearchOption,
+        setSearchOption: saveSearchOption,
     };
 }
 

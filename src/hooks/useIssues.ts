@@ -25,7 +25,7 @@ interface Return {
 export const useIssues = (url: URL, repo: string): Return => {
     let issues = [];
     const issueService = new IssueService();
-    const {loading: settingLoading,filters, setFilters,searchOption, setSearchOption} = useSavedSettings();
+    const {loading: settingLoading, filters, setFilters, searchOption, setSearchOption} = useSavedSettings();
     const [loadIssues, {called, loading, data, error}] = useLazyQuery<GetIssues, GetIssuesVariables>(
         issueService.getIssueQueryForCurrentPage(),
     );
@@ -36,15 +36,15 @@ export const useIssues = (url: URL, repo: string): Return => {
         }
     },[settingLoading,filters,searchOption]);
 
-
     if (error) {
         console.log("Failed to query", error);
     } else if (called && !loading) {
         issues = data.search.nodes.map(issue => new IssueModel(<GetIssues_search_nodes_Issue>issue));
     }
 
+    const isLoading = loading || settingLoading;
     return {
-        loading: loading || settingLoading,
+        loading: isLoading,
         issues,
         filters: {
             ...filters,
@@ -59,7 +59,7 @@ export const useIssues = (url: URL, repo: string): Return => {
             searchOption,
             setSearchOption
         },
-        search: issueService.getQueryParamsAsString(url, repo, filters, searchOption),
+        search: isLoading ? "" : issueService.getQueryParamsAsString(url, repo, filters, searchOption),
     };
 };
 
