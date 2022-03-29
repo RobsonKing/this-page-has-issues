@@ -51,10 +51,10 @@ To use the Chrome dev tools, right click on the extension icon and choose inspec
 
 ## Todo: Ideas
 
+- copy URL and create bug (+)
 - context menu
   - menu item to get page url (so you can copy it to a bug)
   - menu item to log bug
-  - copy URL and create bug
   - bring over: menu code
 - preview issue  (just click on it?)
 - add extra search params
@@ -79,12 +79,8 @@ To use the Chrome dev tools, right click on the extension icon and choose inspec
 - group by bug, issues, etc
 - alias routes (vs vs as)
 - search options
-    - save search options (+) 
     - search by page title
     - search by location on page (right click)
       - show tree of nodes? let the user select
-- dark mode (+)
-  - button color
-  - text field color
+- dark mode
   - option to turn off.
-  - save setting to extension storage.
