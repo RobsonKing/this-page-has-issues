@@ -55,32 +55,30 @@ To use the Chrome dev tools, right click on the extension icon and choose inspec
 - context menu
   - menu item to get page url (so you can copy it to a bug)
   - menu item to log bug
-  - bring over: menu code
 - preview issue  (just click on it?)
-- add extra search params
-- save:
-  - multiple repos
+- saving:
   - obfuscate token
   - is there somewhere better to store token
 - STYLES
   - share styles
-  - respect browser dark mode
-  - is the site using dark mode?
-    - switch styles to dark mode
-- allow user to switch between configured repos
-- search limit...
+  - dark mode
+    - option to turn off.
+- multiple configured repos
+- search 
   - paging... (+)
   - issue count (+)
   - has more (+)
   - next, previous (+)
-- tests (+)
-- fields to add :
-  * issue assigned to
-- group by bug, issues, etc
-- alias routes (vs vs as)
-- search options
+  - add extra search params
+  - search options
     - search by page title
     - search by location on page (right click)
       - show tree of nodes? let the user select
-- dark mode
-  - option to turn off.
+- tests (+)
+- fields to add :
+  -issue assigned to (*)
+- group by bug, issues, etc
+- filter by bug, issue, etc, pr
+- alias routes (vs vs as)
+
+
