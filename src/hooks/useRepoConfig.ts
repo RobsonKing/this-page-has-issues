@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import {ApolloClient, createHttpLink, gql, InMemoryCache} from "@apollo/client";
 import {setContext} from "@apollo/client/link/context";
+import {SearchOption} from "../services/IssueService";
 
 export interface RepoConfig {
     repo: string
@@ -60,6 +61,34 @@ function apolloClientFactory(config): ApolloClient<any> {
         link: authLink.concat(httpLink),
         cache: new InMemoryCache()
     });
+}
+
+interface IssueFilter {
+    showOpenIssues: boolean
+    showClosedIssues: boolean
+}
+interface SavedSettings {
+    loading: boolean
+    filters: IssueFilter
+    setFilters : (IssueFilter) => void
+    searchOption: SearchOption
+    setSearchOption: (SearchOption) => void
+}
+
+export function useSavedSettings(): SavedSettings {
+    const [filters, setFilters] = useState({
+        showOpenIssues: true,
+        showClosedIssues: true,
+    });
+    const [searchOption, setSearchOption] = useState(SearchOption.FULL);
+    // todo: get from storage
+    return {
+        loading: false,
+        filters,
+        setFilters,
+        searchOption,
+        setSearchOption,
+    };
 }
 
 export function useRepoConfig(): RepoConfigResult {
