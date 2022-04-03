@@ -4,6 +4,7 @@ interface CssExports {
   'avatar': string;
   'closed': string;
   'container': string;
+  'footer': string;
   'header': string;
   'issue': string;
   'issue-double-col': string;

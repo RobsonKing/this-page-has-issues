@@ -52,8 +52,8 @@ const NewIssueButtons = ({url, config}: NewIssueProps): React.FC<Props> => {
     };
 
     return <>
-        <button style={{width: 150}} onClick={copyPageId}>{copyText}</button>
-        <button style={{width: 150}} onClick={copyPageIdAndNavigate}>{logNewText}</button>
+        <button onClick={copyPageId}>{copyText}</button>
+        <button onClick={copyPageIdAndNavigate}>{logNewText}</button>
     </>;
 };
 
@@ -66,7 +66,7 @@ export default function Issues({url, showConfig, config}: Props): React.FC<Props
                 <>
                     <div>
                         <h1>This Page Has Issues</h1>
-                        <button style={{width: 150}} onClick={showConfig}>Config...</button>
+                        <button onClick={showConfig}>Config...</button>
                     </div>
 
                     <ReactTooltip id='openIssue' type="warning" effect="solid" place="right">
@@ -104,18 +104,8 @@ export default function Issues({url, showConfig, config}: Props): React.FC<Props
                                 </a>
                             </div>
                         </div>)}
-                        {/*<div style={{*/}
-                        {/*    flex: 6, padding: 10,*/}
-                        {/*}}>*/}
-                        {/*   */}
-                        {/*</div>*/}
                     </div>
-                    <div style={{
-                        display: "flex",
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                        paddingTop: 10,
-                    }}>
+                    <div className={styles.footer}>
                          <span>
                                 Search on <a
                              target="_blank" rel="noreferrer"

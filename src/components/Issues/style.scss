@@ -52,6 +52,13 @@ $color-btn-primary-hover-bg: #2c974b;
   font-size: 15px;
 }
 
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-top: 10px;
+}
+
 .issue-single-col {
   flex: 1;
 }
@@ -70,12 +77,14 @@ $color-btn-primary-hover-bg: #2c974b;
 
 button {
   color: white;
+  width: 130px;
   padding: 3px 12px;
-  background-color: $color-btn-primary-bg ;
+  background-color: $color-btn-primary-bg;
   border-radius: 6px;
   border-width: 1px;
-  border-color: rgba(27,31,36,0.15);
-  &:hover{
+  border-color: rgba(27, 31, 36, 0.15);
+
+  &:hover {
     background-color: $color-btn-primary-hover-bg;
   }
 }
