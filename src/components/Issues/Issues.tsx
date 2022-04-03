@@ -35,10 +35,7 @@ const NewIssueButtons = ({url, config}: NewIssueProps): React.FC<Props> => {
     const uniquePageId = issueService.buildPageSearchString(url, SearchOption.FULL);
     const [copyText, setCopyText] = useState('Copy Page Id');
     const [logNewText, setLogNewText] = useState('Log New Issue');
-    // todo rmk (01 Apr. 2022):
-    //  - style:
-    //    -  keep  size the same
-    //    -  move right
+
     const copyPageId = (): void => {
         navigator.clipboard.writeText(uniquePageId);
         setCopyText('Copied!');
@@ -55,8 +52,8 @@ const NewIssueButtons = ({url, config}: NewIssueProps): React.FC<Props> => {
     };
 
     return <>
-        <button onClick={copyPageId}>{copyText}</button>
-        <button onClick={copyPageIdAndNavigate}>{logNewText}</button>
+        <button style={{width: 150}} onClick={copyPageId}>{copyText}</button>
+        <button style={{width: 150}} onClick={copyPageIdAndNavigate}>{logNewText}</button>
     </>;
 };
 
@@ -69,7 +66,7 @@ export default function Issues({url, showConfig, config}: Props): React.FC<Props
                 <>
                     <div>
                         <h1>This Page Has Issues</h1>
-                        <button onClick={showConfig}>config...</button>
+                        <button style={{width: 150}} onClick={showConfig}>Config...</button>
                     </div>
 
                     <ReactTooltip id='openIssue' type="warning" effect="solid" place="right">
@@ -107,16 +104,24 @@ export default function Issues({url, showConfig, config}: Props): React.FC<Props
                                 </a>
                             </div>
                         </div>)}
-                        <div style={{
-                            flex: 6, padding: 10,
-                        }}>
-                            <span>
+                        {/*<div style={{*/}
+                        {/*    flex: 6, padding: 10,*/}
+                        {/*}}>*/}
+                        {/*   */}
+                        {/*</div>*/}
+                    </div>
+                    <div style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                        paddingTop: 10,
+                    }}>
+                         <span>
                                 Search on <a
-                                target="_blank" rel="noreferrer"
-                                href={`https://github.com/${config.repo}/issues?q=${search}`}>github</a>
+                             target="_blank" rel="noreferrer"
+                             href={`https://github.com/${config.repo}/issues?q=${search}`}>github</a>
                             </span>
-                            <NewIssueButtons config={config} url={url}/>
-                        </div>
+                        <NewIssueButtons config={config} url={url}/>
                     </div>
                 </>
             }
