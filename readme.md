@@ -51,7 +51,6 @@ To use the Chrome dev tools, right click on the extension icon and choose inspec
 
 ## Todo: Ideas
 
-- copy URL and create bug (+)
 - context menu
   - menu item to get page url (so you can copy it to a bug)
   - menu item to log bug
@@ -76,9 +75,9 @@ To use the Chrome dev tools, right click on the extension icon and choose inspec
       - show tree of nodes? let the user select
 - tests (+)
 - fields to add :
-  -issue assigned to (*)
 - group by bug, issues, etc
 - filter by bug, issue, etc, pr
 - alias routes (vs vs as)
+- publish plugin
 
 

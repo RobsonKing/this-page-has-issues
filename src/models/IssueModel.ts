@@ -22,6 +22,14 @@ export default class IssueModel {
         return this.issue.author.login;
     }
 
+    get firstAssigneeLogin(): string {
+        return this.issue.assignees?.[0]?.login;
+    }
+
+    get firstAssigneeAvatar(): string {
+        return this.issue.assignees?.[0]?.avatar;
+    }
+
     get milestone(): string {
         return this.issue.milestone?.title;
     }

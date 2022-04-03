@@ -33,6 +33,26 @@ export interface GetIssues_search_nodes_Issue_author {
   avatarUrl: any;
 }
 
+export interface GetIssues_search_nodes_Issue_assignees_nodes {
+  __typename: "User";
+  /**
+   * The username used to login.
+   */
+  login: string;
+  /**
+   * A URL pointing to the user's public avatar.
+   */
+  avatarUrl: any;
+}
+
+export interface GetIssues_search_nodes_Issue_assignees {
+  __typename: "UserConnection";
+  /**
+   * A list of nodes.
+   */
+  nodes: (GetIssues_search_nodes_Issue_assignees_nodes | null)[] | null;
+}
+
 export interface GetIssues_search_nodes_Issue {
   __typename: "Issue";
   /**
@@ -59,6 +79,10 @@ export interface GetIssues_search_nodes_Issue {
    * The HTTP URL for this issue
    */
   url: any;
+  /**
+   * A list of Users assigned to this object.
+   */
+  assignees: GetIssues_search_nodes_Issue_assignees;
 }
 
 export type GetIssues_search_nodes = GetIssues_search_nodes_App | GetIssues_search_nodes_Issue;

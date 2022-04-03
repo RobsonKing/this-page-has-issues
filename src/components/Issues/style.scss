@@ -4,16 +4,22 @@ $color-btn-primary-hover-bg: #2c974b;
 .container {
   display: flex;
   flex-direction: column;
-  width: 600px;
+  width: 750px;
 }
+
 .title {
   font-weight: bold;
   font-size: 20px;
 }
-.issue-list{
+
+.issue-list {
   display: flex;
   flex-direction: column;
+  border-color: gray;
+  border-bottom-width: 1px;
+  border-style: solid;
 }
+
 .issue-warning {
   color: orange;
   font-style: italic;
@@ -22,21 +28,30 @@ $color-btn-primary-hover-bg: #2c974b;
   border-color: lightgrey;
   padding: 5px;
 }
-.issue{
-  display:flex;
-  flex-direction: row;
+
+.issue {
+  display: flex;
+  flex-direction: column;
   border-style: solid;
-  border-width: 1px;
-  border-color: lightgrey;
+  border-width: 1px 0px 0px 0px;
+  border-color: gray;
   padding: 5px;
 }
 
-.issue .open {
-  color: green;
+.issueDetails {
+  display: flex;
+  flex-direction: row;
+  color: grey;
 }
 
-.issue .closed {
+.issueDetails .open {
+  color: green;
+  margin-right: 3px;
+}
+
+.issueDetails .closed {
   color: purple;
+  margin-right: 3px;
 }
 
 .header {
@@ -68,7 +83,6 @@ $color-btn-primary-hover-bg: #2c974b;
 }
 
 .issue-title {
-  flex: 5;
 }
 
 .avatar {

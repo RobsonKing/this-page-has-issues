@@ -10,8 +10,8 @@ interface CssExports {
   'issue-double-col': string;
   'issue-list': string;
   'issue-single-col': string;
-  'issue-title': string;
   'issue-warning': string;
+  'issueDetails': string;
   'open': string;
   'title': string;
 }

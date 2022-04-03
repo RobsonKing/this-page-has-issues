@@ -7,14 +7,6 @@ import {DocumentNode, gql} from "@apollo/client";
 // todo rmk (10 Nov. 2021):is there a better way to build the url?  git hub ignores special characters, quotes mean the
 //  words must be together, but need and end so it doesn't find child pages or other URLs
 
-//assignees
-// assignees(first:3) {
-//     nodes {
-//         login
-//         avatarUrl
-//     }
-// }
-
 const ISSUE_QUERY = gql`
     query GetIssues($first : Int!, $query: String!){
         search(first: $first, query: $query, type:ISSUE){
@@ -31,6 +23,14 @@ const ISSUE_QUERY = gql`
                         avatarUrl
                     }
                     url
+                    assignees(first:3) {
+                        nodes {
+                            ... on User {
+                                login
+                                avatarUrl
+                            }
+                        }
+                    }
                 }
             }
         }
