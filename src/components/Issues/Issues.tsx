@@ -1,5 +1,4 @@
 import * as React from "react";
-import {useState} from "react";
 import styles from './style.scss';
 import BarLoader from "react-spinners/BarLoader";
 import {useIssues} from "../../hooks/useIssues";
@@ -7,7 +6,7 @@ import ReactTooltip from "react-tooltip";
 import classNames from "classnames";
 import {RepoConfig} from "../../hooks/useRepoConfig";
 import {FilterBar} from "../FilterBar/FilterBar";
-import IssueService, {SearchOption} from "../../services/IssueService";
+import NewIssueButtons from "../NewIssuesButtons/NewIssueButtons";
 
 interface Props {
     url: URL
@@ -23,38 +22,6 @@ const IssueHeader = (): React.FC => {
         <span className={styles['issue-double-col']}>Milestone</span>
         <span className={styles['issue-title']}>Title</span>
     </div>;
-};
-
-interface NewIssueProps {
-    url: URL
-    config: RepoConfig
-}
-
-const NewIssueButtons = ({url, config}: NewIssueProps): React.FC<Props> => {
-    const issueService = new IssueService();
-    const uniquePageId = issueService.buildPageSearchString(url, SearchOption.FULL);
-    const [copyText, setCopyText] = useState('Copy Page Id');
-    const [logNewText, setLogNewText] = useState('Log New Issue');
-
-    const copyPageId = (): void => {
-        navigator.clipboard.writeText(uniquePageId);
-        setCopyText('Copied!');
-        setTimeout(() => {
-            setCopyText('Copy Page Id');
-        }, 1000);
-    };
-    const copyPageIdAndNavigate = (): void => {
-        navigator.clipboard.writeText(uniquePageId);
-        setLogNewText('Copied!');
-        setTimeout(() => {
-            window.open(`https://github.com/${config.repo}/issues/new/choose`, "_blank");
-        }, 1000);
-    };
-
-    return <>
-        <button onClick={copyPageId}>{copyText}</button>
-        <button onClick={copyPageIdAndNavigate}>{logNewText}</button>
-    </>;
 };
 
 export default function Issues({url, showConfig, config}: Props): React.FC<Props> {
