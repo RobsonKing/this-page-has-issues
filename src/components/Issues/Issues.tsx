@@ -33,7 +33,6 @@ export default function Issues({url, showConfig, config}: Props): React.FC<Props
                         Issue is closed
                     </ReactTooltip>
 
-                    <button disabled={!hasMore} onClick={fetchMore}>Fetch more</button>
                     <FilterBar filters={filters}/>
                     <div className={styles["issue-list"]}>
                         {issues.length === 0 && <div className={styles["issue-warning"]}>No issues found</div>}
@@ -55,6 +54,7 @@ export default function Issues({url, showConfig, config}: Props): React.FC<Props
 
                         </div>)}
                     </div>
+                    {hasMore && <button disabled={!hasMore} onClick={fetchMore}>Fetch more</button>}
                     <div className={styles.footer}>
                          <span>
                                 Search on <a
