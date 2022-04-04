@@ -8,26 +8,32 @@ import {DocumentNode, gql} from "@apollo/client";
 //  words must be together, but need and end so it doesn't find child pages or other URLs
 
 const ISSUE_QUERY = gql`
-    query GetIssues($first : Int!, $query: String!){
-        search(first: $first, query: $query, type:ISSUE){
-            nodes{
-                ... on Issue{
-                    number
-                    milestone{
+    query GetIssues($first : Int!, $query: String!,$cursor: String){
+        search(first: $first, after: $cursor, query: $query, type:ISSUE){
+            pageInfo {
+                endCursor
+                hasNextPage
+            }
+            edges {
+                node{
+                    ... on Issue{
+                        number
+                        milestone{
+                            title
+                        }
+                        state
                         title
-                    }
-                    state
-                    title
-                    author{
-                        login
-                        avatarUrl
-                    }
-                    url
-                    assignees(first:3) {
-                        nodes {
-                            ... on User {
-                                login
-                                avatarUrl
+                        author{
+                            login
+                            avatarUrl
+                        }
+                        url
+                        assignees(first:3) {
+                            nodes {
+                                ... on User {
+                                    login
+                                    avatarUrl
+                                }
                             }
                         }
                     }

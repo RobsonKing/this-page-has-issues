@@ -15,8 +15,7 @@ interface Props {
 }
 
 export default function Issues({url, showConfig, config}: Props): React.FC<Props> {
-    const {loading, issues, filters, search} = useIssues(url, config.repo);
-
+    const {loading, issues, filters, search, hasMore, fetchMore} = useIssues(url, config.repo);
     return (
         <div className={styles.container}>
             {loading ? <BarLoader loading={true} color='gray' width='100%'/> :
@@ -34,6 +33,7 @@ export default function Issues({url, showConfig, config}: Props): React.FC<Props
                         Issue is closed
                     </ReactTooltip>
 
+                    <button disabled={!hasMore} onClick={fetchMore}>Fetch more</button>
                     <FilterBar filters={filters}/>
                     <div className={styles["issue-list"]}>
                         {issues.length === 0 && <div className={styles["issue-warning"]}>No issues found</div>}

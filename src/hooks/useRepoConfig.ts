@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import {ApolloClient, createHttpLink, gql, InMemoryCache} from "@apollo/client";
 import {setContext} from "@apollo/client/link/context";
 import {SearchOption} from "../services/IssueService";
+import {relayStylePagination} from "@apollo/client/utilities";
 
 export interface RepoConfig {
     repo: string
@@ -59,7 +60,17 @@ function apolloClientFactory(config): ApolloClient<any> {
     });
     return new ApolloClient({
         link: authLink.concat(httpLink),
-        cache: new InMemoryCache()
+        connectToDevTools: true,
+        cache: new InMemoryCache({
+            typePolicies: {
+                Query: {
+                    keyFields: ["number"],
+                    fields: {
+                        search: relayStylePagination(),
+                    },
+                },
+            },
+        })
     });
 }
 
