@@ -27,7 +27,7 @@ interface RepoConfigResult {
 // can be greatly simplified.
 function getKeysFromSyncStorage<TConfig>(keys:string[]): Promise<TConfig> {
     return new Promise((resolve, reject) => {
-        chrome.storage.sync.get(keys, (items) => {
+        chrome.storage.local.get(keys, (items) => {
             if (chrome.runtime.lastError) {
                 return reject(chrome.runtime.lastError);
             }
@@ -113,12 +113,12 @@ export function useSavedSettings(): SavedSettings {
     },[]);
 
     const saveSearchOption = (value: SearchOption): void => {
-        chrome.storage.sync.set({searchOption: value}, () => {
+        chrome.storage.local.set({searchOption: value}, () => {
             setSearchOption(value);
         });
     };
     const saveSearchFilters = (value: IssueFilter): void => {
-        chrome.storage.sync.set({filters: value}, () => {
+        chrome.storage.local.set({filters: value}, () => {
             setFilters(value);
         });
     };
@@ -165,7 +165,7 @@ export function useRepoConfig(): RepoConfigResult {
     }, [config]);
 
     const saveAndTestConfig = (values: RepoConfig): void => {
-        chrome.storage.sync.set(values, () => {
+        chrome.storage.local.set(values, () => {
             setConfig(values);
         });
     };
