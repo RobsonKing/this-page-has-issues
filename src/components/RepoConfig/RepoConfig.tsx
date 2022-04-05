@@ -1,6 +1,6 @@
 import * as React from "react";
-import {Form, Formik, Field} from 'formik';
-import {PulseLoader, BarLoader} from "react-spinners";
+import {Field, Form, Formik} from 'formik';
+import {BarLoader, PulseLoader} from "react-spinners";
 import styles from './style.scss';
 import {RepoConfigState, useRepoConfig} from "../../hooks/useRepoConfig";
 import ReactTooltip from 'react-tooltip';
@@ -45,7 +45,7 @@ export default function RepoConfig({hide}: Props): React.FC<Props> {
                                 target="_blank" rel="noreferrer"
                                 href='https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token'>here</a></span>
                         </ReactTooltip>
-                        <Field id="token" name="token" placeholder="Token"/>
+                        <Field id="token" name="token" placeholder="Token" type="password"/>
                         <span>
                             <button type="submit">Save</button>
                         </span>
