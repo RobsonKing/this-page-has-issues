@@ -15,7 +15,7 @@ interface Props {
 }
 
 export default function Issues({url, showConfig, config}: Props): React.FC<Props> {
-    const {loading, issues, filters, search, hasMore, fetchMore} = useIssues(url, config.repo);
+    const {loading, loadingMore, issues, filters, search, hasMore, fetchMore} = useIssues(url, config.repo);
     return (
         <div className={styles.container}>
             {loading ? <BarLoader loading={true} color='gray' width='100%'/> :
@@ -54,7 +54,8 @@ export default function Issues({url, showConfig, config}: Props): React.FC<Props
 
                         </div>)}
                     </div>
-                    {hasMore && <button disabled={!hasMore} onClick={fetchMore}>Fetch more</button>}
+                    {hasMore && !loadingMore && <button disabled={!hasMore} onClick={fetchMore}>Fetch more</button>}
+                    {loadingMore && <BarLoader loading={true} color='gray' width='100%'/>}
                     <div className={styles.footer}>
                          <span>
                                 Search on <a

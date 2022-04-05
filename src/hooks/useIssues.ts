@@ -2,7 +2,7 @@ import {useLazyQuery} from "@apollo/client";
 import IssueService, {SearchOption} from "../services/IssueService";
 import IssueModel from "../models/IssueModel";
 import {GetIssues, GetIssuesVariables} from "../services/__generated__/getIssues";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {useSavedSettings} from "./useRepoConfig";
 
 export interface Filters {
@@ -17,6 +17,7 @@ export interface Filters {
 
 interface Return {
     loading: boolean
+    loadingMore: boolean
     issues: IssueModel[]
     filters: Filters
     search: string
@@ -27,6 +28,7 @@ interface Return {
 export const useIssues = (url: URL, repo: string): Return => {
     let issues = [];
     let hasMore = false;
+    const [loadingMore, setLoadingMore] = useState(false);
     const issueService = new IssueService();
     const {loading: settingLoading, filters, setFilters, searchOption, setSearchOption} = useSavedSettings();
     const [loadIssues, {called, loading, data, error, fetchMore}] = useLazyQuery<GetIssues, GetIssuesVariables>(
@@ -44,21 +46,24 @@ export const useIssues = (url: URL, repo: string): Return => {
     if (error) {
         console.log("Failed to query", error);
     } else if (called && !loading) {
-        issues = data.search.edges.map(edge => new IssueModel(edge.node));
         hasMore = data.search.pageInfo.hasNextPage;
+        issues = data.search.edges.map(edge => new IssueModel(edge.node));
     }
 
     const isLoading = loading || settingLoading;
     return {
         loading: isLoading,
+        loadingMore,
         issues,
         hasMore,
-        fetchMore: () => {
-            fetchMore({
+        fetchMore: async () => {
+            setLoadingMore(true);
+            await fetchMore({
                 variables: {
                     cursor: data.search.pageInfo.endCursor,
                 },
             });
+            setLoadingMore(false);
         },
         filters: {
             ...filters,
