@@ -64,10 +64,7 @@ To use the Chrome dev tools, right click on the extension icon and choose inspec
     - option to turn off.
 - multiple configured repos
 - search 
-  - paging... (+)
   - issue count (+)
-  - has more (+)
-  - next, previous (+)
   - add extra search params
   - search options
     - search by page title
@@ -79,5 +76,6 @@ To use the Chrome dev tools, right click on the extension icon and choose inspec
 - filter by bug, issue, etc, pr
 - alias routes (vs vs as)
 - publish plugin
+- consider also show PRs
 
 
